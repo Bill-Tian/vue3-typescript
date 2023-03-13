@@ -36,10 +36,10 @@ export default {
   name: "",
   setup() {
     const data = reactive(new InitData());
-    getGoodslist().then((res) => {
-      data.list = res.data;
-      data.selectData.count = res.data.length;
-    });
+    // getGoodslist().then((res) => {
+    //   data.list = res.data;
+    //   data.selectData.count = res.data.length;
+    // });
     const dataList = reactive({
       comList: computed(() => {
         return data.list.slice(

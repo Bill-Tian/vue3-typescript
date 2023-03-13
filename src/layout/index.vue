@@ -12,9 +12,11 @@
                             <component :is="collapsed ? Expand : Fold"></component>
                         </el-icon>
                     </el-row>
-
+                    <HeaderBar />
                 </el-header>
-                <el-main>Main</el-main>
+                <el-main>
+                    <AppMain />
+                </el-main>
             </el-container>
         </el-container>
     </div>
@@ -23,6 +25,8 @@
 <script setup lang="ts">
 import LogoBar from './components/LogoBar/index.vue'
 import MenuBar from './components/MenuBar/index.vue'
+import AppMain from './components/AppMain/index.vue'
+import HeaderBar from './components/HeaderBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue';
 import { computed, ref } from 'vue';
 
@@ -48,11 +52,13 @@ const autoWidth = computed(() => {
     .exicon {
         font-size: 26px;
         cursor: pointer;
+        margin-right: 20px;
     }
 
     .el-aside {
         background-color: $menuBg;
         overflow: hidden;
+        transition: 0.5s;
     }
 
     .el-header {

@@ -1,7 +1,17 @@
-$menuText: #dee1f0;
+$menuText: #bfcbd9;
 $menuActiveText: #409eff;
 $subMenuActiveText: #f4f4f5;
-$menuBg: #1e202d;
-$menuHover: #3d4157;
-$subMenuBg: #1e202d;
-$subMenuHover: #3d4157;
+$menuBg: #304156;
+$menuHover: #263445;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  subMenuActiveText: $subMenuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+}
