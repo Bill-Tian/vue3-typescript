@@ -15,6 +15,7 @@
                     <HeaderBar />
                 </el-header>
                 <el-main>
+                    <TabBar />
                     <AppMain />
                 </el-main>
             </el-container>
@@ -27,6 +28,7 @@ import LogoBar from './components/LogoBar/index.vue'
 import MenuBar from './components/MenuBar/index.vue'
 import AppMain from './components/AppMain/index.vue'
 import HeaderBar from './components/HeaderBar/index.vue'
+import TabBar from './components/TabBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue';
 import { computed, ref } from 'vue';
 

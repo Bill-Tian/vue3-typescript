@@ -1,21 +1,33 @@
 import { defineStore } from 'pinia'
 import { store } from '../index'
-import { reactive } from 'vue';
 
 import type { Itab } from '../type'
 
-interface State {
+interface TabState {
     tabList: Array<Itab>
 }
-export const tabsCounterStore = defineStore("tabs", () => {
+export const tabsCounterStore = defineStore("tabs", {
 
-    state: () => ({
-        tabList: [],
-    })
+    state: (): TabState => ({
+        tabList: []
+    }),
+
+    getters: {
+        getAddTab(state: TabState) {
+            return state.tabList
+        },
+    },
 
     actions: {
-        addTab(state, tab: Itab) {
-            tabList.value.some(item => item.path === tab.path)
+        addTab(tab: Itab) {
+            const isSome = this.tabList.some(item => item.path === tab.path)
+            if (!isSome) {
+                this.tabList.push(tab)
+            }
+        },
+        removeTab(targetPath: string) {
+            const index = this.tabList.findIndex(item => item.path === targetPath);
+            this.tabList.splice(index, 1)
         },
     },
 
@@ -24,4 +36,4 @@ export const tabsCounterStore = defineStore("tabs", () => {
 
 export const tabsCounterStoreWithOut = () => {
     return tabsCounterStore(store)
-  }
+}
