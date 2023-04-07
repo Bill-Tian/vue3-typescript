@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
 import { reactive, ref } from 'vue'
-import MenuItem from './menuItem.vue'
+import MenuItem from './MenuItem.vue'
 
 defineProps({
   collapsed: {
