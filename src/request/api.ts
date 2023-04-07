@@ -1,11 +1,12 @@
-import service from ".";
+import service from "@/utils/request";
 interface loginData{
     username:string,
     password:string
 }
+const baseapi = '/api'
 export function login(data:loginData){
     return service({
-        url:'/login',
+        url:baseapi + '/users/login',
         method:'post',
         data
     })
@@ -13,7 +14,7 @@ export function login(data:loginData){
 
 export function getGoodslist(){
     return service({
-        url:'/getGoodslist',
+        url:baseapi + '/getGoodslist',
         method:'get'
     })
 }

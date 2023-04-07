@@ -44,6 +44,7 @@ import { LoginData } from "../type/login";
 import type { FormInstance } from "element-plus";
 import {login} from '../request/api'
 import {useRouter} from 'vue-router'
+import { setToken } from '@/utils/storage'
 export default {
   name: "todo-item",
   setup() {
@@ -87,7 +88,10 @@ export default {
         if (valid) {
         login(data.ruleForm).then((res)=>{
           console.log('22222222');
+          console.log(res);
           
+          
+          setToken(res.data.token)
           localStorage.setItem('token',res.data.token)
           router.push('/')
         })
