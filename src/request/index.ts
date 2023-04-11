@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getToken } from '@/utils/storage'
 
 const service = axios.create({
     // baseURL:'https://www.fastmock.site/mock/bf1fcb3c2e2945669c2c8d0ecb8009b8/api',
@@ -12,8 +13,8 @@ const service = axios.create({
 // 请求拦截
 service.interceptors.request.use((config)=>{
     config.headers = config.headers || {}
-    if (localStorage.getItem('token')) {
-        config.headers.token = localStorage.getItem('token') || ''
+    if (getToken()) {
+        config.headers.token = getToken() || ''
     }
     return config
 })

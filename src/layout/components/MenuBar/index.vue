@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="1" class="el-menu" :collapse="collapsed" active-text-color="#409eff" text-color="#bfcbd9"
+  <el-menu :default-active="activeMenu" class="el-menu" :collapse="collapsed" active-text-color="#409eff" text-color="#bfcbd9"
     background-color="#304156">
     <menu-item :menu-list="menuList"></menu-item>
   </el-menu>
@@ -7,7 +7,7 @@
   
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import { reactive, ref } from 'vue'
+import { reactive, ref ,computed } from 'vue'
 import MenuItem from './MenuItem.vue'
 
 defineProps({
@@ -16,8 +16,13 @@ defineProps({
   }
 })
 const router = useRouter()
+
 // const menuList = router.getRoutes()
 // console.log(menuList);
+
+const activeMenu =  computed(()=>{
+  return router.currentRoute.value.fullPath
+})
 
 const menuList = reactive(
   [

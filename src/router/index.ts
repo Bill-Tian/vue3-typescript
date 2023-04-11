@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import {basicRoutes} from './modules/basic'
+import { basicRoutes } from './modules/basic'
 import Layout from "@/layout/index.vue";
-import {getToken} from '@/utils/storage'
+import { getToken } from '@/utils/storage'
+import NProgress from '@/utils/nprogress'
 
 // 定义一个公共路径集合，任何用户及匿名者都能访问的到
 export const PUBLIC_PATH = new Set()
@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "用户管理",
     component: Layout,
     meta: {
-      title: "用户管理",icon: "UserFilled",
+      title: "用户管理", icon: "UserFilled",
     },
     children: [
       {
@@ -86,20 +86,22 @@ const router = createRouter({
 
 
 
-router.beforeEach(async (to) => {
+
+
+router.beforeEach(async (to, from) => {
+  NProgress.start()
   // 根据是否有 token 判断用户是否登录
   const token = getToken()
-  // 如果[未登录]且要访问[不在]公共路径集合里的路径时，跳转到登录页面并记录之前的页面用于重新访问
+
   if (!token && !PUBLIC_PATH.has(to.path))
-    return {path: '/login', query: {redirect: to.fullPath}}
-  // const userStore = useUserStore()
-  // 如果已登录但因为刷新后导致保存在内存中的数据(登录信息，动态添加的路由等)丢失，
-  // 需要再次发起请求重新获取用户信息，并动态添加路由
-  if (token) {
-    // 要添加个catch处理错误
-    return to
-  }
+    return { path: '/login' }
+
 })
+
+// 路由跳转后的监听操作
+router.afterEach((to, _from) => {
+  NProgress.done()
+});
 
 
 export default router;

@@ -9,7 +9,7 @@
             </template>
             <menu-item :menu-list="item.children"></menu-item>
         </el-sub-menu>
-        <el-menu-item @click="() => toPath(item.path)" :index="item.path" v-else>
+        <el-menu-item @click="() => toPath(item.path)" :index="item.redirect ? item.redirect : item.path" v-else>
             <el-icon>
                 <component :is="item.meta.icon" />
             </el-icon>
