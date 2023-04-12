@@ -25,6 +25,7 @@
         .title {
             font-size: 20px;
             color: #ffffff;
+            white-space: nowrap;
         }
     }
 </style>

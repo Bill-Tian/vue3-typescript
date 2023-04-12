@@ -14,8 +14,8 @@
                     </el-row>
                     <HeaderBar />
                 </el-header>
+                <TabBar />
                 <el-main>
-                    <TabBar />
                     <AppMain />
                 </el-main>
             </el-container>

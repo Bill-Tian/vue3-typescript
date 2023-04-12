@@ -1,15 +1,24 @@
 <template>
-  <el-tabs v-model="activeTabs" type="card" editable class="demo-tabs" @tab-click="tabClick" @tab-remove="tabRemove">
+  <!-- <el-tabs v-model="activeTabs" type="card" editable class="demo-tabs" @tab-click="tabClick" @tab-remove="tabRemove">
     <el-tab-pane v-for="item in tabsList" :key="item.path" :label="item.title" :name="item.path">
       {{ item.title }}
     </el-tab-pane>
-  </el-tabs>
+  </el-tabs> -->
+
+  <div class="tabs">
+    <el-scrollbar>
+      <div class="scrollbar-flex-content">
+        <tab-item v-for="item in tabsList" :key="item.path" :itemInfo="item" :active="activeTabs === item.path" @tabRemove="tabRemove"></tab-item>
+      </div>
+    </el-scrollbar>
+  </div>
 </template>
 <script lang="ts" setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { tabsCounterStoreWithOut } from '@/store/modules/tabs'
 import { useRoute, useRouter } from 'vue-router'
 import type { Itab } from '@/store/type'
+import TabItem  from './TabBarItem.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -30,7 +39,7 @@ const addTab = () => {
   tabStore.addTab(tabItem)
 }
 
-watch(route, () => {
+watch(route, () => {  
   activeTabs.value = route.path
   addTab()
 })
@@ -64,25 +73,27 @@ const tabRemove = (event: any) => {
 const refresh = () => {
   window.addEventListener('beforeunload', () => {
     sessionStorage.setItem('TAB_ROUTERS', JSON.stringify(tabsList.value))
-    sessionStorage.setItem('ACTIVE_NAME', activeTabs.value)
+    // sessionStorage.setItem('ACTIVE_NAME', activeTabs.value)
   })
 
   const seeion = sessionStorage.getItem('TAB_ROUTERS')
-  const active = sessionStorage.getItem('ACTIVE_NAME')
+  // const active = sessionStorage.getItem('ACTIVE_NAME')
   if (seeion) {
     const tabItem = JSON.parse(seeion)
     tabItem.forEach((item: Itab) => {
       tabStore.addTab(item)
     })
   }
-  if (active) {
-    activeTabs.value = active
-  }
+  // if (active) {
+  //   activeTabs.value = active
+  // }
 }
 
 onMounted(() => {
-
   refresh()
+
+  activeTabs.value = route.path
+
   if (tabsList.value.length < 1) {
     addTab()
     activeTabs.value = '/dashboard'
@@ -91,12 +102,25 @@ onMounted(() => {
 })
 
 </script>
-<style>
+<style scoped>
 .demo-tabs>.el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
 }
+
+.tabs {
+  display: flex;
+  /* height: 40px; */
+  align-items: center;
+  border-top: 1px solid #d8dce5;
+  border-bottom: 1px solid #d8dce5;
+}
+.scrollbar-flex-content {
+  display: flex;
+  height: 34px;
+}
+
 </style>
   
