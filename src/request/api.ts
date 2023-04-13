@@ -12,6 +12,13 @@ export function login(data:loginData){
     })
 }
 
+export function getUserInfo(){
+    return service({
+        url:baseapi + '/users/getUserInfo',
+        method:'get'
+    })
+}
+
 export function getGoodslist(){
     return service({
         url:baseapi + '/getGoodslist',

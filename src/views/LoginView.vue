@@ -66,9 +66,7 @@ export default {
       formEl.validate((valid) => {
         if (valid) {
           login(data.ruleForm).then((res) => {
-            console.log(res);
-            
-            if (res.status === 200) {
+            if (res.code === 200) {
               setToken(res.token)
               // localStorage.setItem('token',res.data.token)
               router.push("/dashboard")
@@ -103,15 +101,17 @@ export default {
 .login-box {
   width: 100%;
   height: 100%;
-  background: rgb(44, 15, 91);
-  padding: 1px;
+  background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .demo-ruleForm {
   width: 500px;
-  margin: 200px auto;
-  background-color: #fff;
+  height: 200px;
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
   padding: 40px;
   border-radius: 20px;
 }
@@ -121,6 +121,6 @@ export default {
 }
 
 h2 {
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 </style>

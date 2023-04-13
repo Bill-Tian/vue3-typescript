@@ -30,16 +30,18 @@
 
 <script lang="ts">
 import { reactive, toRefs, onMounted, computed } from "vue";
-import { getGoodslist } from "../request/api";
+import { getGoodslist,getUserInfo } from "../request/api";
 import { InitData, ListInt } from "../type/goods";
 export default {
   name: "",
   setup() {
     const data = reactive(new InitData());
-    // getGoodslist().then((res) => {
-    //   data.list = res.data;
-    //   data.selectData.count = res.data.length;
-    // });
+    getUserInfo().then((res) => {
+      console.log(res);
+      
+      // data.list = res.data;
+      // data.selectData.count = res.data.length;
+    });
     const dataList = reactive({
       comList: computed(() => {
         return data.list.slice(
