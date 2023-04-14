@@ -68,7 +68,6 @@ export default {
           login(data.ruleForm).then((res) => {
             if (res.code === 200) {
               setToken(res.token)
-              // localStorage.setItem('token',res.data.token)
               router.push("/dashboard")
             } else {
               ElMessage.error(res.message)
